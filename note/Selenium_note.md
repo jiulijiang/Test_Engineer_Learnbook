@@ -87,12 +87,12 @@
   - 也可以通过多个`>`，通过选择子元素的子元素来选择后代元素
   - ` `和`>`可以混用
 ### 根据属性选择元素
-- `CSS swlector`选择属性的语法是在属性名前加一个`[`，属性名后加一个`]`
+- `CSS selector`选择属性的语法是在属性名前加一个`[`，属性名后加一个`]`
 - 例如:选择所有`href`属性值为`https://www.byhy.net/` 的元素:
   - `wd.find_elements(By.CSS_SELECTOR, '[href="https://www.byhy.net/"]')`
-- 也可以只写一个`herf`属性，表示选择所有有`href`属性的元素:
+- 也可以只写一个`href`属性，表示选择所有有`href`属性的元素:
   - `wd.find_elements(By.CSS_SELECTOR, '[href]')`
-- 属性选择可以和标签叠加，例如可以在`herf`前写一个`div`标签，表示选择所有标签名为`div`且带有`href`属性的元素:
+- 属性选择可以和标签叠加，例如可以在`href`前写一个`div`标签，表示选择所有标签名为`div`且带有`href`属性的元素:
   - `wd.find_elements(By.CSS_SELECTOR, 'div[href]')`
 - 属性包含选择,例如选择所有`href`属性值包含`byhy`的元素:
   - `wd.find_elements(By.CSS_SELECTOR, '[href*="byhy"]')`
@@ -103,7 +103,7 @@
   - `$`表示属性值以`byhy`结尾
 - 如果要包含多个属性限制，可以直接在后面加上新的属性限制:
   - `wd.find_elements(By.CSS_SELECTOR, 'div[href*="byhy"][class="people"]')`
-  - 如上就表示选择标签名为`div`且`herf`属性值包含`byhy`，并且`class`属性值为`people`的元素
+  - 如上就表示选择标签名为`div`且`href`属性值包含`byhy`，并且`class`属性值为`people`的元素
 ### 验证`CSS selector`
   - 想要验证表达式正不正确可以在页面开发者模式下按`ctrl`+`f`进入搜索界面，把表达式扔进去验证
   - 一般会出现`1 of n`，`n`表示有几个元素可以被当前表达式匹配到，前面的1表示当前匹配到第几个
@@ -356,7 +356,7 @@
     - `wd.switch_to.alert.text`
 - **Confirm**:
   - `Confirm`弹出框，主要是让用户确认是否要进行某个操作
-  - 模拟用户点击 OK 按钮，与`alter`相同:
+  - 模拟用户点击 OK 按钮，与`alert`相同:
     - `wd.switch_to.alert.accept()`
   - 模拟用户点击 Cancel 按钮:
     - `wd.switch_to.alert.dismiss()`

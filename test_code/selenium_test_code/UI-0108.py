@@ -2,9 +2,14 @@ from time import sleep
 from selenium import webdriver
 from selenium.common import NoAlertPresentException, StaleElementReferenceException
 from selenium.webdriver.common.by import By
-from can_reuesu_code.login import login_byhy
 import openpyxl
+import sys
+import os
 
+# 添加项目根目录到Python路径
+sys.path.append(os.path.abspath('c:/Users/thoma/PycharmProjects/Auto_test_learn'))
+
+from can_reuesu_code.login import login_byhy
 
 def del_element(wd: webdriver, element_css_selector: str):
     """
