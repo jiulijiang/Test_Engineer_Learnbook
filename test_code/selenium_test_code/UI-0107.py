@@ -2,7 +2,7 @@ from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from can_reuesu_code.login import login_byhy
-import openpyxl  # 替换 xlrd 为 openpyxl
+import openpyxl
 
 wd = webdriver.Edge()
 login_byhy(wd, "http://127.0.0.1:8080")
