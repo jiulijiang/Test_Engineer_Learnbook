@@ -1,35 +1,54 @@
-# 测试工程师学习仓库
+# Auto_test_learn
 
 ## 📚 仓库简介
 
-这是一个个人的测试工程师的系统化学习和实践仓库，汇集了软件测试领域的核心知识、实用技能和实战项目。本仓库旨在记录个人测试能力从基础到进阶，全面提升测试能力，也分享个人在测试领域的经验和思考。
+这是一个个人的测试工程师系统化学习和实践仓库，汇集了软件测试领域的核心知识、实用技能和实战项目。本仓库旨在记录个人测试能力从基础到进阶的全面提升过程，同时也分享测试领域的经验和思考。
 
 ## 📁 目录结构
 
 ```
 ├── README.md                  # 项目说明文档
 ├── can_reuesu_code/           # 可重用的测试代码模块
-│   ├── login.py               # 登录模块示例
+│   ├── __init__.py            # 包初始化文件
+│   ├── __pycache__/           # Python编译缓存
+│   │   ├── __init__.cpython-310.pyc
+│   │   └── login.cpython-310.pyc
+│   └── login.py               # 登录模块示例
 ├── note/                      # 学习笔记目录
-│   ├── Python_learn_note.md   # Python基础知识笔记
-│   ├── Selenium_note.md       # Selenium自动化测试笔记
-│   ├── SQL_note.md            # SQL学习笔记
+│   ├── App_test.md            # App测试笔记
 │   ├── Linux-learn.md         # Linux学习笔记
 │   ├── Performance Testing.md # 性能测试笔记
+│   ├── Python_Learning_Notes_Optimized.md # 优化后的Python学习笔记
+│   ├── Python_learn_note.md   # Python基础知识笔记
+│   ├── SQL_note.md            # SQL学习笔记
+│   ├── Selenium_note.md       # Selenium自动化测试笔记
+│   ├── Software_test_theory_note.md # 软件测试理论笔记
 │   ├── functional_test.md     # 功能测试笔记
-│   ├── Auto_test_theory_note.md # 自动化测试理论笔记
+│   ├── image/                 # 笔记中使用的图片资源
+│   │   └── Auto_test_theory_note/ # 自动化测试理论笔记图片
 │   └── img/                   # 笔记中使用的图片资源
 ├── test_code/                 # 测试代码示例
+│   ├── __pycache__/           # Python编译缓存
+│   │   └── test.cpython-310.pyc
 │   ├── selenium_test_code/    # Selenium自动化测试代码
 │   │   ├── UI-0101.py         # UI测试用例1（登录测试）
 │   │   ├── UI-0102.py         # UI测试用例2（添加客户）
-│   │   └── UI-0103.py等       # 其他UI测试用例
+│   │   ├── UI-0103.py         # UI测试用例3
+│   │   ├── UI-0105.py         # UI测试用例5
+│   │   ├── UI-0106.py         # UI测试用例6
+│   │   ├── UI-0107.py         # UI测试用例7
+│   │   └── UI-0108.py         # UI测试用例8
 │   ├── test.py                # 基础测试脚本示例
+│   └── test1.py               # 测试脚本示例
 └── test_excel/                # 测试数据文件（Excel格式）
+    ├── WeChat_need.xlsx       # 微信相关测试数据
+    ├── Xmind_need.xlsx        # Xmind相关测试数据
+    ├── baidu_need.xlsx        # 百度相关测试数据
     ├── login_need.xlsx        # 登录测试数据
-    ├── regist_need.xlsx       # 注册测试数据
     ├── message_need.xlsx      # 消息测试数据
-    └── baidu_need.xlsx等      # 其他测试场景数据
+    ├── qq_need.xlsx           # QQ相关测试数据
+    ├── qq_test.xlsx           # QQ测试数据
+    └── regist_need.xlsx       # 注册测试数据
 ```
 
 ## 🔍 主要内容
@@ -53,7 +72,7 @@
 
 ### 3. 编程语言学习
 
-- **Python基础**：变量、数据类型、控制流、函数、数据容器、异常处理、文件操作、模块与包等
+- **Python基础**：变量、数据类型、控制流、函数、数据容器、异常处理、文件操作、模块与包、面向对象编程、高阶技巧等
 - **SQL**：数据库操作和查询语言，支持数据测试和分析
 - **Linux**：Linux系统基础命令和操作，包括目录结构、文件操作、权限管理等
 
@@ -116,8 +135,8 @@ wd.quit()
 ## 📝 学习路径建议
 
 1. **基础阶段**：
-   - 学习软件测试基础理论（Auto_test_theory_note.md）
-   - 掌握Python编程语言基础（Python_learn_note.md）
+   - 学习软件测试基础理论（Software_test_theory_note.md）
+   - 掌握Python编程语言基础（Python_learn_note.md 或 Python_Learning_Notes_Optimized.md）
    - 学习Linux基础命令（Linux-learn.md）
    - 熟悉SQL基础（SQL_note.md）
 
@@ -133,6 +152,7 @@ wd.quit()
 
 4. **提升阶段**：
    - 学习性能测试（Performance Testing.md）
+   - 学习App测试（App_test.md）
    - 学习接口测试
    - 掌握测试框架（如Pytest）的使用
    - 学习持续集成/持续测试
@@ -161,6 +181,8 @@ wd.quit()
 ## 📅 更新记录
 
 - 仓库持续更新中，不定期添加新的学习笔记、测试示例代码和实用工具
+- 优化了Python学习笔记结构，内容更加系统化
+- 更新了文件命名，使笔记分类更加清晰
 - 及时跟进测试领域的新技术和新方法
 
 ---
