@@ -1,4 +1,4 @@
-# Auto_test_learn
+# Test_Engineer_Learnbook
 
 ## 📚 仓库简介
 
@@ -9,11 +9,6 @@
 ```
 ├── README.md                  # 项目说明文档
 ├── can_reuesu_code/           # 可重用的测试代码模块
-│   ├── __init__.py            # 包初始化文件
-│   ├── __pycache__/           # Python编译缓存
-│   │   ├── __init__.cpython-310.pyc
-│   │   └── login.cpython-310.pyc
-│   └── login.py               # 登录模块示例
 ├── note/                      # 学习笔记目录
 │   ├── App_test.md            # App测试笔记
 │   ├── Linux-learn.md         # Linux学习笔记
@@ -28,27 +23,7 @@
 │   │   └── Auto_test_theory_note/ # 自动化测试理论笔记图片
 │   └── img/                   # 笔记中使用的图片资源
 ├── test_code/                 # 测试代码示例
-│   ├── __pycache__/           # Python编译缓存
-│   │   └── test.cpython-310.pyc
-│   ├── selenium_test_code/    # Selenium自动化测试代码
-│   │   ├── UI-0101.py         # UI测试用例1（登录测试）
-│   │   ├── UI-0102.py         # UI测试用例2（添加客户）
-│   │   ├── UI-0103.py         # UI测试用例3
-│   │   ├── UI-0105.py         # UI测试用例5
-│   │   ├── UI-0106.py         # UI测试用例6
-│   │   ├── UI-0107.py         # UI测试用例7
-│   │   └── UI-0108.py         # UI测试用例8
-│   ├── test.py                # 基础测试脚本示例
-│   └── test1.py               # 测试脚本示例
 └── test_excel/                # 测试数据文件（Excel格式）
-    ├── WeChat_need.xlsx       # 微信相关测试数据
-    ├── Xmind_need.xlsx        # Xmind相关测试数据
-    ├── baidu_need.xlsx        # 百度相关测试数据
-    ├── login_need.xlsx        # 登录测试数据
-    ├── message_need.xlsx      # 消息测试数据
-    ├── qq_need.xlsx           # QQ相关测试数据
-    ├── qq_test.xlsx           # QQ测试数据
-    └── regist_need.xlsx       # 注册测试数据
 ```
 
 ## 🔍 主要内容
