@@ -1,8 +1,61 @@
 # Selenium学习
 
+
+
+## 3.页面元素
+
+- 人操作页面流程
+
+  ```yacas
+  1.打开浏览器
+  2.输入访问地址（URL）
+  3.页面信息操作
+  4.关闭/退出浏览器
+  ```
+
+- **页面构成三大核心技术**
+
+  > 查看页面元素/页面代码内容：F12  或者  Fn + F12
+
+  - HTML（HyperText Markup Language）：超文本标签语言，主要用来实现页面的内容。
+  - CSS（Cascading Style Sheets）：层叠样式表，主要让页面显示内容更加美观。
+  - JS（JavaScript）：一门脚本语言，主要用于实现页面动态效果。
+
+- HTML 标签的基本组成
+
+  ```html
+  # 双标签
+  <标签名 属性名1='属性值1 属性值2' 属性名2='属性值'>文本内容</标签名>
+  
+  # 单标签
+  <标签名 属性='属性值' >
+  ```
+
+  **前置**：了解前端基础，认识什么是**标签名**, 什么是**属性名**, 什么是**属性值**，什么是**文本内容** 即可。
+
+  ```yacas
+  标签名：HTML文档内容的基本构成块
+  属性：给标签提供的额外信息（控制标签的行为或外观），位于标签的内部的键值，多个属性通过空格分开
+  ```
+
+  ![image-20240901230222178](img/image-20240901230222178.png)
+
+- 元素定位的方式
+
+  ```yacas
+  1. ID  标签的ID 属性
+  2. name  标签的 name 属性
+  3. class_name  标签的 class 属性
+  4. tag_name   标签的名字
+  5. link_text  a 标签(超链接)中的文本内容
+  6. partial_link_text  a 标签(超链接)中的部分文本内容
+  7. xpath 路径表达式(使用最多)
+  8. css 使用css选择器定位
+  ```
 ## 选择元素基本方法
 
-- 根据`id`选择元素
+### 根据`id`选择元素
+
   - 根据规范，`id`不能重复，是唯一的，根据id选择元素是最快的
   - 语法:`element = wd.find_element(By.ID, 'id')
 
@@ -26,14 +79,15 @@
     input('按回车退出')
     ```
 
-- 根据元素`class`选择元素
-  - `class`可以一次性选择多个元素
-    - 语法:`elements = wd.find_elements(By.CLASS_NAME, 'class')`
-    - 如果找不到元素，`elements`变量的值为空列表
-    - 可以利用空列表特性来判断元素是否存在
-  - 想要只选择单个元素:
-    - 语法:`element = wd.find_element(By.CLASS_NAME, 'class')`
-    - 会获取匹配的第一个元素
+### 根据元素`class`选择元素
+
+- `class`可以一次性选择多个元素
+  - 语法:`elements = wd.find_elements(By.CLASS_NAME, 'class')`
+  - 如果找不到元素，`elements`变量的值为空列表
+  - 可以利用空列表特性来判断元素是否存在
+- 想要只选择单个元素:
+  - 语法:`element = wd.find_element(By.CLASS_NAME, 'class')`
+  - 会获取匹配的第一个元素
 - `find_element()`和`find_elements()`区别:
   - `find_element()`会返回第一个匹配的元素，如果没有会抛出异常
   - `find_elements()`会返回所有匹配的元素组成的列表，如果没有会返回空列表
@@ -42,10 +96,28 @@
   - 使用元素的`text`属性，可以获取元素的文本内容:
   - 语法:`element.text`
     - 例如:`print(element.text)`,这行代码就可以打印`element`元素的文本内容
-- 根据`tag`名选元素
-  - 和`class`属性一样，`tag`属性值可以有多个，多个用空格隔开
-  - 语法:`elements = wd.find_elements(By.TAG_NAME, 'tag')`
-- 通过`WebElement`对象选择元素
+
+### 根据`tag`名选元素
+
+- 和`class`属性一样，`tag`属性值可以有多个，多个用空格隔开
+- 语法:`elements = wd.find_elements(By.TAG_NAME, 'tag')`
+
+### 根据`a`标签定位页面元素
+
+- 语法：`element = wd.find_element(By.LINK_TEXT, 'link_text')`
+  - 根据`a`标签的文本内容来定位元素
+  - 例如：
+  ```python
+  element = wd.find_element(By.LINK_TEXT, '新闻')
+  ```
+- 语法：`element = wd.find_element(By.PARTIAL_LINK_TEXT, 'partial_link_text')`
+  - 根据`a`标签的部分文本内容来定位元素
+  - 例如：
+  ```python
+  element = wd.find_element(By.PARTIAL_LINK_TEXT, '新')
+  ```
+### 通过`WebElement`对象选择元素
+
   - `WebDirver`对象选择的是整个页面，`WebElement`对象选择是某个元素内部，可以先通过id确定外层元素，在对内层元素进行操作
 
   ```python
@@ -67,17 +139,55 @@
   ```
 
   - 如上例子就是先定位bilibili首页的搜索框，再对搜索框进行输入操作
-- 等待元素出现
+### 等待元素出现
+#### 隐式等待
   - `webdriver`对象提供了`implicitly_wait()`方法，设置隐式等待时间，当元素不存在时，会等待一段时间，如果元素存在，则立即返回
   - 语法:`wd.implicitly_wait(10)` 10秒内，如果元素不存在，则每隔0.5秒检查一次，如果元素存在，则立即返回
+#### 显式等待
+- 定位**指定**元素时，如果能定位到元素则直接返回该元素，不触发等待
+- 定位**指定**元素时，如果不能定位到元素，则会等待一段时间，如果在等待时间内定位到元素，则立即返回
+- 定位**指定**元素时，如果不能定位到元素，则会抛出异常
+- 语法:
+  - 导包:`from selenium.webdriver.support.wait import WebDriverWait`
+  - `element = WebDriverWait(wd, 10).until(lambda x: x.find_element(By.CSS_SELECTOR, 'CSS_SELECTOR参数'))`
+  - 10秒内，如果元素不存在，则每隔0.5秒检查一次，如果元素存在，则立即返回
+  - 如果10秒内元素还没有出现，则会抛出异常
+  - 例子：
+  ```python
+  from selenium import webdriver
+  from selenium.webdriver.common.by import By
+  from selenium.webdriver.support.wait import WebDriverWait
+  
+  # 初始化WebDriver
+  wd = webdriver.Edge()
+  wd.get('http://121.43.169.97:8848/login.html')
+  
+  # 使用显式等待定位用户名输入框，最多等待10秒
+  username_input = WebDriverWait(wd, 10).until(
+      lambda x: x.find_element(By.CSS_SELECTOR, '#username')
+  )
+  
+  # 对定位到的元素进行操作
+  username_input.send_keys('testuser')
+  
+  # 关闭浏览器
+  wd.quit()
+  ```
+- 个人理解：后面的until中传入一个逻辑，这个逻辑可以由开发者自己定义，在规定的时间内去获取一个非空的结果，并将结果传给变量，这么传递可以极大提升等待条件的灵活性，比如可以根据元素的`text`属性、`class`属性、`id`属性等去等待元素的出现。
+
 
 ## CSS selector
 
+### 验证`CSS selector`
+
+- 想要验证表达式正不正确可以在页面开发者模式下按`ctrl`+`f`进入搜索界面，把表达式扔进去验证
+- 一般会出现`1 of n`，`n`表示有几个元素可以被当前表达式匹配到，前面的1表示当前匹配到第几个
+
 ### 选择元素
 
-- 选择单个元素语法:`element = wd.find_element(By.CSS_SELECTOR, 'CSS_selector参数')`
-- 选择多个元素语法:`elements = wd.find_elements(By.CSS_SELECTOR, 'CSS_selector参数')`
-- `CSS selector`同样可以根据tag名、id 属性和 class属性 来 选择元素:
+- 选择单个元素语法:`element = wd.find_element(By.CSS_SELECTOR, 'CSS_SELECTOR参数')`
+- 选择多个元素语法:`elements = wd.find_elements(By.CSS_SELECTOR, 'CSS_SELECTOR参数')`
+- `CSS_SELECTOR`同样可以根据tag名、id 属性和 class属性 来 选择元素:
   - 例如,选择所有tag名为div的元素:
     - `wd.find_elements(By.CSS_SELECTOR, 'div')`
     - 等价于`wd.find_elements(By.TAG_NAME, 'div')`
@@ -117,10 +227,7 @@
   - `wd.find_elements(By.CSS_SELECTOR, 'div[href*="byhy"][class="people"]')`
   - 如上就表示选择标签名为`div`且`href`属性值包含`byhy`，并且`class`属性值为`people`的元素
 
-### 验证`CSS selector`
 
-- 想要验证表达式正不正确可以在页面开发者模式下按`ctrl`+`f`进入搜索界面，把表达式扔进去验证
-- 一般会出现`1 of n`，`n`表示有几个元素可以被当前表达式匹配到，前面的1表示当前匹配到第几个
 
 ### 选择语法联合使用
 
@@ -344,6 +451,7 @@
 #### ActionChains 类方法
 
 - 个人理解:**ActionChains的实例化实际上是一个指定了操作对象的动作链，可以按照既定的步骤逐步记录对对象的元素进行操作，最后通过perform统一提交给操作对象执行**
+- 导包:`from selenium.webdriver.common.action_chains import ActionChains`
 - perform() 方法:所有 ActionChains 的动作必须通过 .perform() 才会执行
 - context_click():右击
 
@@ -473,7 +581,7 @@
   alert.dismiss()
   ```
 
-#### 其他技巧
+### 其他技巧
 
 - 获取窗口大小
   - `wd.get_window_size()`
@@ -485,6 +593,7 @@
   - `wd.current_url`
 - 截屏
   - `wd.get_screenshot_as_file("照片名字")`
+
 - 手机模式
   - 可以通过 desired_capabilities 参数，指定以手机模式打开chrome浏览器
   - 参考代码:
@@ -525,6 +634,19 @@
 
   - 多个文件多次调用即可
 
+#### 获取元素信息
+- 获取元素大小
+  - `element.size`
+- 获取文本
+  - `element.text`
+- 元素是否可见
+  - `element.is_displayed()`
+- 元素是否可用
+  - `element.is_enabled()`
+- 元素是否选中
+  - `element.is_selected()`
+
+
 ## Xpath选择器
 
 ### 语法简介
@@ -550,7 +672,10 @@
 - 根据`class`:`//*[@class='class值']`:意思是选择所有`class`属性值为`class值`的元素
   - `//select[@class='single_choice']`:选择所有`class`属性值为`single_choice`的`select`元素
 - 根据其他属性:可以利用某些元素特有的属性，例如`//*[@multiple]`:意思是选择所有带有`multiple`属性的元素
-
+- 根据文本内容:
+  - 语法:`//*[text()='文本内容']`
+  - 例如:`//*[text()='新闻']`:选择所有文本内容为`新闻`的元素
+  - 注意:根据文本选择不要带`@`
 ### 按次序选择
 
 #### 某类型第n个元素
@@ -614,3 +739,94 @@ for element in elements:
 
 - 如上在寻找的时候，出现的不是china内部的p元素， 而是所有的p元素
 - 修改:`elements = china.find_elements(By.XPATH, './/p')`
+
+
+## UI自动化常见面试问题
+
+> 能有效应对面试中的一些常规测试场景问题
+
+1. 功能测试和UI自动化测试啥关系？
+
+   ```yacas
+   功能测试包含UI自动化（更趋向于页面级的功能测试）
+   ```
+
+2. UI自动化包含哪些？
+
+   ```yacas
+   - web自动化测试
+   - 移动端自动化测试
+   ```
+
+3. UI自动化测试前提？
+
+   ```yacas
+   - 项目需要大量的回归测试（原版本的复测）
+   - 项目需求变更不频繁
+   - 项目周期比较长
+   ```
+
+4. UI自动化测试时机？
+
+   ```yacas
+   一般在手工测试完成后，项目趋于稳定时可以介入UI自动化【版本回归】
+   ```
+
+5. UI自动化测试优劣势？
+
+   ```yacas
+   优势:
+   1. 节省人力成本
+   2. 提高测试效率【执行】
+   3. 提高测试质量
+   4. 构造一些测试数据
+   5. 项目文档辅助
+   劣势:
+   1.对于测试人员要求较高
+   2.前期投入成本高【人+时间】
+   3.对项目要求比较高【不适合频繁的需求变更】
+   ```
+
+6. 元素等待
+
+- 固定等待：等待指定的时间（编写简单，但控制时间不精准）
+
+- 隐式等待：整个webdriver生命周期（全局）对所有元素都生效，会等待指定时间，直到元素出现或超时
+
+- 显示等待：对特定元素等待，而不是对整个页面的等待，按照指定频率和时间查找元素，直到元素出现或超时
+
+  > 面试题目：隐式等待和显示等待的区别？
+
+  ![image-20240709020512766](img/image-20240709020512766.png)
+
+7. 定位元素问题
+
+> 面试：定位不到元素如何分析？
+
+![image-20230104111436967](img/image-20230104111436967-1725207221196-1.png)
+
+8. 验证码处理
+
+> 面试题：在自动化测试中，出现验证码怎么处理？
+>
+> - 去掉验证码或使用万能验证码
+> - 通过记录cookie形式处理
+> - 通过OCR识别技术实现【成功率低，难度大】
+
+```yacas
+cookie是啥？
+1.Cookie是Web服务器生成并发送到用户浏览器的一小段文本。浏览器会将这些信息片段以“键/值”对（key-value pairs）的形式保存在本地的某个目录下的文本文件中。
+2.Cookie可以用来存储用户的登录状态【解决http协议无状态特征】,当用户访问受保护的资源时，服务器可以检查Cookie来确定用户是否已经登录，避免反复登录。
+```
+
+![image-20240709021831157](img/image-20240709021831157.png)
+
+9. 错误截图
+
+- 页面级测试如何确定是否通过（一般截图）
+
+```python
+driver.get_screenshot_as_file(图片的路径)
+# 1. 图片的格式 使用 png
+# 2. 如果路径包含目录,目录必须存在
+```
