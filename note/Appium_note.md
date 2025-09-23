@@ -11,9 +11,9 @@
     Ruby等主流语言；
 
 
-## 1.移动端测试
+## 移动端测试
 
-### 1.1 移动端环境搭建
+### 移动端环境搭建
 
 ```yacas
 1.JDK：Java开发工具包，提供Java程序的开发及运行环境
@@ -27,7 +27,7 @@ https://github.com/appium/appium-desktop/releases/tag/v1.22.3-4
 
 ![image-20240904200620529](img/image-20240904200620529.png)
 
-### 1.2 移动端自动化技术
+### 移动端自动化技术
 
 - appium服务介绍
 
@@ -90,7 +90,7 @@ https://github.com/appium/appium-desktop/releases/tag/v1.22.3-4
 
     
 
-### 1.3 移动端项目实战
+### 移动端操作
 
 - **项目**：完成tpshop商城app客户单下单业务流程自动化测试
 
@@ -118,3 +118,111 @@ https://github.com/appium/appium-desktop/releases/tag/v1.22.3-4
     windows下：adb shell dumpsys window | findstr mCurrentFocus
     macOS下：adb shell dumpsys window | grep mCurrentFocus
     ```
+
+
+- APP元素定位方法
+
+    - 导包：
+    ```python
+    from appium.webdriver.common.appiumby import AppiumBy
+    ```
+  ![image-20241208153628851](img/image-20241208153628851.png)
+
+  - 按照ID定位
+
+    ```yacas
+    通过resource-id属性值定位，最常用
+    ```
+
+  - 按照CLASS定位
+
+    ```yacas
+    通过class属性值定位，会重复的概率比较高
+    ```
+
+  - 按照XPATH定位
+
+    ```yacas
+    属性值的构成：value = "//class的值[@属性名='属性值']"
+    ```
+
+  - 按照坐标定位
+
+    ```yacas
+    # 通过UiAutomatorViewer的bounds属性值[810,1785][1080,1905]  点击定位
+    driver.tap([(810,1785),(1080,1905)],duration=0)
+    # 注意：使用坐标时，如果分辨率发生了变化，就得重新获取坐标值
+    ```
+- app元素操作
+![image](img/image.png)
+    - click点击
+    ```python
+    driver.find_element(By.ID, "com.tpshop.malls:id/btn_login").click()
+    ```
+    - 输入
+    ```python
+    driver.find_element(By.ID, "com.tpshop.malls:id/et_login_account").send_keys("13000000000")
+    ```
+    - 清除
+    ```python
+    driver.find_element(By.ID, "com.tpshop.malls:id/et_login_account").clear()
+    ```
+    - tap点击
+    ```python
+    driver.tap([(810,1785),(1080,1905)],duration=0)
+    ```
+    至多支持5个坐标点，每个坐标点的格式为(x, y)，单位为像素，duration为点击持续时间，单位为毫秒
+
+
+## 其他api方法
+- 各类操作
+```markdown
+跳转应用：driver.start_activity(appPackage,appActivity)
+获取包名：driver.current_package
+获取界面名：driver.current_activity
+关闭APP：driver.close_app()
+关闭驱动：driver.quit()
+安装app:driver.install_app(app_path)
+卸载app:driver.remove_app(app_id)
+判断app是否安装：driver.is_app_installed(app_id)
+置于后台：background_app(seconds)
+```
+- 获取元素信息-文本、位置和大小
+```markdown
+ele.text  # 获取元素的文本内容
+ele.location  # 获取元素的位置信息，返回一个元组 (x, y)
+ele.size  # 获取元素的大小信息，返回一个元组 (width, height)
+```
+- 获取元素属性
+```markdown
+ele.get_attribute('属性名')  # 获取元素的属性值
+```
+注意：获取属性值对应的属性名和实际UIAutoMatorViewer
+ 显式的不一定一致！！！！
+ 如：
+ 元素的`class`属性在UIAutoMatorViewer中显示为`class`，而在代码中获取时使用的是`className`
+
+- 截图
+```python
+driver.get_screenshot_as_file('截图保存路径.png')
+```
+- 获取手机网络
+```python
+driver.network_connection
+```
+- 发送键到设备
+```python
+driver.press_keycode(keycode)
+```
+- 操作通知栏
+```python
+driver.open_notifications() # 打开通知栏
+```
+- 拖拽
+```python
+driver.drag_and_drop(ele1, ele2)
+```
+    - origin_el：滑动开始的元素
+    - destination_el： 滑动结束的元素
+
+
