@@ -152,7 +152,52 @@
 
 ### 修改表
 
-- 【通过AI自己查询了解】
+- 作用：对已存在的表结构进行修改，包括添加列、修改列、删除列、修改表名等操作
+
+- 常用操作及格式：
+  
+  1. 添加列
+     - 格式：`alter table 表名 add 列名 数据类型 [约束];`
+     - 案例：
+       ```mysql
+       -- 在student表中添加age列，类型为int
+       alter table student add age int;
+       
+       -- 添加带约束的列
+       alter table student add email varchar(50) unique not null;
+       ```
+  
+  2. 修改列（修改数据类型）
+     - 格式：`alter table 表名 modify 列名 新数据类型 [新约束];`
+     - 案例：
+       ```mysql
+       -- 修改student表中age列的类型为tinyint
+       alter table student modify age tinyint;
+       ```
+  
+  3. 修改列名和数据类型
+     - 格式：`alter table 表名 change 旧列名 新列名 新数据类型 [约束];`
+     - 案例：
+       ```mysql
+       -- 将student表中的name列改为s_name，类型为varchar(30)
+       alter table student change name s_name varchar(30);
+       ```
+  
+  4. 删除列
+     - 格式：`alter table 表名 drop 列名;`
+     - 案例：
+       ```mysql
+       -- 删除student表中的email列
+       alter table student drop email;
+       ```
+  
+  5. 修改表名
+     - 格式：`alter table 旧表名 rename to 新表名;`
+     - 案例：
+       ```mysql
+       -- 将student表改名为students
+       alter table student rename to students;
+       ```
 
 ### 查看表结构
 
@@ -172,7 +217,7 @@
 
   ![image-20240603120300075](img\image-20240603120300075.png)
 
-## 4.数据操作[重点]
+## 4.数据操作 **[重点]**
 
 ### 插入数据
 
@@ -245,7 +290,7 @@
 
 
 
-## 5.复杂数据查询[重点]
+## 5.复杂数据查询 **[重点]**
 
 ### 5.0 数据准备
 
