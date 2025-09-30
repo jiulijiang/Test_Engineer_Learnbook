@@ -226,3 +226,157 @@ http://kdtx-test.itheima.net/
     - 请求参数：-
     - 预期响应状态码：200
     - 预期返回数据：{"id": 1, "name": "张三", "age": 25}
+
+### postman
+- 介绍：Postman一款接口调试工具
+- 特点：支持Mac、Windows和Linux
+- 下载: https://www.getpostman.com/
+![postman](img/image_postman.png)
+
+#### postman使用
+- 打开postman
+- 新建请求
+- 输入请求URL
+- 选择请求方法
+- 添加请求头（可选）
+- 添加请求参数（可选）
+- 发送请求
+- 查看响应状态码
+- 查看响应数据
+
+#### postman断言
+- Postman断言：让Postman工具代替人工自动判断预期结果和实际结果是否一致
+- 用法：
+    - ‘Tests’后置脚本标签页编写JavaScript断言代码
+    - 断言结果（PASS/FAIL）在‘Test Results’标签页中展示
+
+- **响应代码断言**
+    - 模板名称：Status code: Code is 200
+    - 模板内容：
+```javascript
+// 断言响应状态码是否为200
+pm.test("status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+pm.test()函数：
+参数1：字符串-测试断言名称
+参数2：回调函数-具体断言语句
+
+pm.response.to.have.status(code:Number); //判断是否包含指定状态码
+```
+
+- **包含指定字符串断言**
+    - 模板名称：Response body: Contains string
+    - 模板内容：
+```javascript
+// 断言响应体是否包含指定字符串
+pm.test("断言响应体包含指定字符串", function () {
+    pm.expect(pm.response.text()).to.include("指定字符串");
+});
+
+//通过一系列调用链判断是否符合预期
+pm.expect(): 接收实际结果
+.to : 连接符，用于连接断言与判断
+.include : 用于指定断言方式和预期结果
+pm.response.text() : 用于获取响应体文本格式数据
+```
+- **JSON数据断言**
+    - 模板名称：Response body: JSON value check
+    - 模板内容：
+```javascript
+// 断言响应体JSON数据中指定字段是否等于指定值
+pm.test("Your test name", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData.value).to.eql(100);
+});
+
+pm.response.json() : 用于获取响应体JSON格式数据
+.value : json数据中键值对的键
+.eql() : 用于指定断言方式和预期结果
+```
+#### 面试题：测试数据如何构造
+- 从UI界面构造测试数据
+- 从数据库构造测试数据
+    - 新建：insert into 表名 (字段1, 字段2, ...) values (值1, 值2, ...);
+    - 更新：update 表名 set 字段1=值1, 字段2=值2, ... where 条件;
+    - 从接口构造数据： 如：查询课程之前，先使用新增课程接口解决课程id问题
+
+
+### Jmeter
+- 协议支持: 支持多种协议 HTTP、HTTPS、FTP、SOAP、REST、JMS等
+- 语言支持: java
+- 性能测试: 强大的性能测试功能
+- 下载：https://jmeter.apache.org/download_jmeter.cgi
+
+#### json PATH Expression（JSON路径表达式）
+- 介绍：用于从JSON格式数据中提取指定字段的值
+- 格式：$.字段名
+- 示例：
+    - 从以下JSON数据中提取“name”字段的值
+    ```json
+    {
+        "id": 1,
+        "name": "张三",
+        "age": 25
+    }
+    ```
+    - 表达式：$.name
+    - 结果：“张三”
+    - 多层嵌套示例：
+    ```json
+    {
+        "id": 1,
+        "name": "张三",
+        "age": 25,
+        "address": {
+            "city": "北京",
+            "street": "东城区"
+        }
+    }
+    ```
+    - 表达式：$.address.city
+    - 结果：“北京”
+#### json提取器引用
+- 介绍：用于在Jmeter中引用之前提取的JSON数据中的字段值
+- 格式：${变量名}
+
+#### Jmeter 响应断言
+- 作用：对HTTP请求的任意格式的响应结果进行断言
+- 位置：测试计划 --> 线程组--> HTTP请求 --> (右键添加) 断言 --> 响应断言
+![响应断言](img/image_response_assert.png)
+
+
+#### jmeter 参数化
+- 作用：在Jmeter中使用外部数据文件（如CSV、Excel等）中的数据来替换请求中的参数
+- 位置：测试计划 --> 线程组--> HTTP请求 --> (右键添加) 配置元件 --> CSV数据文件设置
+
+#### Jmeter 跨线程组关联
+- 作用：在不同的线程组之间传递参数或变量值
+- 位置：测试计划 --> 线程组--> 后置处理器 --> BeanShell 后置处理程序
+- 示例：
+    - 线程组1：发送登录请求，提取token,通过Benshell后置处理程序将token存储到变量中，利用函数${__setProperty()}存储
+    - 线程组2：发送需要token认证的请求，引用线程组1中提取的token，利用函数${__property()}引用
+    - 直接使用函数助手对话框来添加函数
+
+
+### Requests 模块
+
+#### Requests 发送请求
+- 格式：`requests.请求方法(url, params=None, data=None, json=None, headers=None)`
+- 说明：
+• 常见的请求方法： get/post/put/delete
+• url: 请求的url地址
+• params： 请求查询参数
+• data： 请求体为form表单参数
+• json： 请求体为json参数
+• headers： 请求头参数
+#### Response查看响应
+- ---- 属性/方法----   |  ---- 说明---- 
+    - response.status_code 状态码
+    - response.json() JSON形式的响应内容
+    - response.text 文本形式的响应内容
+    - response.url 请求url
+    - response.encoding 查看响应头部字符编码
+    - response.headers 头信息
+    - response.cookies cookie信息
