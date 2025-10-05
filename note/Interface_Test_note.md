@@ -361,7 +361,7 @@ pm.response.json() : 用于获取响应体JSON格式数据
 
 
 ### Requests 模块
-
+简短教程：`https://www.runoob.com/python3/python-requests.html`
 #### Requests 发送请求
 - 格式：`requests.请求方法(url, params=None, data=None, json=None, headers=None)`
 - 说明：
@@ -380,3 +380,22 @@ pm.response.json() : 用于获取响应体JSON格式数据
     - response.encoding 查看响应头部字符编码
     - response.headers 头信息
     - response.cookies cookie信息
+
+
+#### session会话
+- 作用：用于在多个请求之间保持会话状态，如保持登录状态
+- 格式：`session = requests.Session()`
+- 说明：
+    - 会话对象可以在多个请求之间共享cookie、会话状态等信息
+    - 会话对象可以用于发送多个请求，而无需重复设置cookie等信息
+    - 会话对象可以用于模拟登录等操作，保持会话状态
+- 优势：
+    - 会话对象可以在多个请求之间共享会话状态，避免重复设置cookie等信息
+    - 会话对象可以用于模拟登录等操作，保持会话状态
+    - 会话对象可以用于发送多个请求，而无需重复设置cookie等信息 
+
+
+### pymysql 模块
+- 作用：用于在Python中连接和操作MySQL数据库
+- 安装：`pip install pymysql`
+- 文档：`https://pymysql.readthedocs.io/en/latest/`
