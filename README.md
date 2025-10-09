@@ -2,27 +2,26 @@
 
 ## 📚 仓库简介
 
-这是一个个人的测试工程师系统化学习和实践仓库，汇集了软件测试领域的核心知识、实用技能和实战项目。本仓库旨在记录个人测试能力从基础到进阶的全面提升过程，同时也分享测试领域的经验和思考。
+这是一个专注于个人学习测试技术知识的记录仓库，汇集了软件测试领域的核心知识、实用技能和学习笔记。本仓库旨在系统记录个人测试能力从基础到进阶的全面提升过程，作为个人成长的知识沉淀。
 
 ## 📁 目录结构
 
 ```
 ├── README.md                  # 项目说明文档
-├── can_reuesu_code/           # 可重用的测试代码模块
 ├── note/                      # 学习笔记目录
 │   ├── App_test.md            # App测试笔记
+│   ├── Appium_note.md         # Appium自动化测试笔记
+│   ├── Interface_Test_note.md # 接口测试笔记
 │   ├── Linux-learn.md         # Linux学习笔记
+│   ├── OOP_Pytest_Detailed_Notes.md # 面向对象与Pytest详细笔记
 │   ├── Performance Testing.md # 性能测试笔记
 │   ├── Python_Learning_Notes_Optimized.md # 优化后的Python学习笔记
 │   ├── Python_learn_note.md   # Python基础知识笔记
 │   ├── SQL_note.md            # SQL学习笔记
 │   ├── Selenium_note.md       # Selenium自动化测试笔记
 │   ├── Software_test_theory_note.md # 软件测试理论笔记
-│   ├── functional_test.md     # 功能测试笔记
 │   ├── image/                 # 笔记中使用的图片资源
-│   │   └── Auto_test_theory_note/ # 自动化测试理论笔记图片
-│   └── img/                   # 笔记中使用的图片资源
-├── test_code/                 # 测试代码示例
+│   └── img/                   # 笔记中使用的图片资源（与image目录功能重复）
 └── test_excel/                # 测试数据文件（Excel格式）
 ```
 
@@ -53,59 +52,32 @@
 
 ### 4. 自动化测试
 
-- **Selenium**：Web自动化测试框架学习笔记和实践代码
+- **Selenium**：Web自动化测试框架学习笔记
   - 元素定位方法（ID、Class、CSS Selector等）
   - 元素操作（点击、输入、获取文本等）
   - 等待机制（隐式等待、显式等待）
-- **UI自动化测试用例**：包含多个完整的UI自动化测试示例
-- **可重用测试组件**：如登录模块等可在不同测试场景中复用的代码
+- **Appium**：移动端自动化测试框架学习笔记
+- **接口测试**：接口测试方法、工具和实践经验总结
+- **Pytest**：Python测试框架的详细学习笔记
 
-### 5. 测试数据管理
+### 5. 高级测试技术
 
-- 多种测试场景的数据文件，存储在Excel格式中
-- 包含登录、注册、消息、百度等不同测试场景的测试数据
-- 支持参数化测试和数据驱动测试
+- **性能测试**：性能测试概念、工具使用、场景设计和结果分析
+- **App测试**：移动端应用测试方法、工具和实践经验
+- **测试数据管理**：多种测试场景的数据文件，存储在Excel格式中
+  - 包含登录、注册、消息、百度等不同测试场景的测试数据
 
 ## 🚀 如何使用
-
-### 环境准备
-
-1. 确保安装了Python 3.x环境
-2. 安装必要的依赖包：
-   ```bash
-   pip install selenium openpyxl
-   ```
-3. 下载并配置对应浏览器的WebDriver（如ChromeDriver、EdgeDriver）
-4. 确保WebDriver与浏览器版本匹配
-
-### 运行测试脚本
-
-1. 进入`test_code`目录
-2. 运行具体的测试脚本：
-   ```bash
-   python selenium_test_code/UI-0101.py
-   ```
-3. 观察测试执行过程和结果输出
-
-### 使用可重用模块
-
-可以在自己的测试项目中导入并使用`can_reuesu_code`目录下的模块：
-
-```python
-from can_reuesu_code.login import login_byhy
-from selenium import webdriver
-
-wd = webdriver.Edge()
-login_byhy(wd, "http://127.0.0.1:8080")
-# 后续测试代码...
-wd.quit()
-```
 
 ### 查看学习笔记
 
 - 直接打开`note`目录下的Markdown文件进行学习
-- 笔记内容涵盖测试理论、编程基础、自动化测试等多个方面
-- 结合代码示例进行实践学习
+- 笔记内容包含丰富的图片资源，使学习内容更加直观易懂
+
+### 利用测试数据
+
+- `test_excel`目录下提供了多种测试场景的数据文件
+- 这些数据可以辅助理解测试用例设计和数据驱动测试的概念
 
 ## 📝 学习路径建议
 
@@ -117,48 +89,36 @@ wd.quit()
 
 2. **进阶阶段**：
    - 学习Selenium自动化测试（Selenium_note.md）
-   - 练习编写简单的自动化测试脚本
+   - 学习接口测试（Interface_Test_note.md）
    - 掌握测试用例设计方法
 
 3. **实践阶段**：
-   - 运行并修改示例测试代码
-   - 尝试编写完整的测试套件
-   - 学习使用测试数据进行数据驱动测试
+   - 结合测试数据文件（test_excel/目录）进行测试用例设计实践
+   - 尝试使用Selenium进行简单的Web自动化测试
 
 4. **提升阶段**：
    - 学习性能测试（Performance Testing.md）
-   - 学习App测试（App_test.md）
-   - 学习接口测试
-   - 掌握测试框架（如Pytest）的使用
-   - 学习持续集成/持续测试
+   - 学习App测试（App_test.md）和Appium自动化（Appium_note.md）
+   - 掌握Pytest测试框架（OOP_Pytest_Detailed_Notes.md）
 
 ## 🛠️ 开发工具推荐
 
 - **IDE**：PyCharm、VSCode
 - **浏览器**：Chrome、Edge
-- **测试框架**：Selenium、Pytest
+- **测试框架**：Selenium、Pytest、Appium
 - **数据管理**：Excel、数据库
 - **版本控制**：Git
 - **测试管理工具**：Jira、TestLink
 
-## 📊 测试项目实战
-
-仓库中的测试代码示例涵盖了多个实际测试场景：
-
-1. **登录功能测试**：验证系统登录功能的正确性
-2. **客户管理测试**：测试客户信息的添加、查询、修改和删除功能
-3. **界面元素测试**：验证页面元素的显示和交互是否符合预期
-
-## 🤝 贡献指南
-
-如果你发现任何问题或有改进建议，欢迎提交Issue或Pull Request。同时，也欢迎你分享自己的测试学习笔记和实践代码，让这个仓库成为测试工程师共同学习的平台。
-
 ## 📅 更新记录
 
-- 仓库持续更新中，不定期添加新的学习笔记、测试示例代码和实用工具
-- 优化了Python学习笔记结构，内容更加系统化
-- 更新了文件命名，使笔记分类更加清晰
-- 及时跟进测试领域的新技术和新方法
+- **仓库定位优化**：专注于个人学习测试技术的知识整理，不再存储测试练手代码
+- **代码迁移**：测试练手代码已迁移至其他专门仓库
+- **新增内容**：
+  - Appium_note.md（Appium自动化测试笔记）
+  - Interface_Test_note.md（接口测试笔记）
+  - OOP_Pytest_Detailed_Notes.md（面向对象与Pytest详细笔记）
+- **结构优化**：持续优化学习笔记结构，内容更加系统化
 
 ---
 
