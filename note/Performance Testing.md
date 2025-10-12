@@ -235,3 +235,78 @@
 - `-o [html report folder]`：存放生成测试报告的路径，路径可以是相对路径也可以是绝对路径
 
 **注意**：result.jtl和report会自动生成，如果在执行命令时result.jtl和report已存在，必须用先删除，否则在运行命令时就会报错
+
+
+## Locust 压测
+
+Locust是一款开源的性能测试工具，使用Python代码定义用户行为，不需要笨重的UI或XML配置。
+
+### 主要特点
+- 基于Python的开源压测工具，使用纯Python编写测试场景
+- 支持分布式压测，可以在多台机器上运行测试
+- 支持自定义压测场景，灵活性高
+- 支持压测结果可视化，提供实时监控界面
+- 支持HTTP、WebSocket等协议
+
+### 安装方法
+```bash
+pip install locust
+```
+
+### 基本测试脚本示例
+创建一个简单的locustfile.py文件：
+```python
+from locust import HttpUser, task, between
+
+class QuickstartUser(HttpUser):
+    wait_time = between(1, 2)  # 用户等待时间1-2秒
+    
+    @task
+    def hello_world(self):
+        self.client.get("/")
+        self.client.get("/hello")
+    
+    @task(3)  # 权重为3，表示执行频率更高
+    def view_items(self):
+        for item_id in range(10):
+            self.client.get(f"/item?id={item_id}")
+            self.wait()
+```
+
+### 执行方式
+1. **启动Web界面**
+   ```bash
+   locust -f locustfile.py
+   ```
+   然后访问 http://localhost:8089 开始测试
+
+2. **命令行模式执行**
+   ```bash
+   locust -f locustfile.py --headless -u 100 -r 10 -t 1m
+   ```
+   - `-u`：并发用户数
+   - `-r`：每秒新增用户数
+   - `-t`：测试持续时间
+
+### 分布式执行
+```bash
+# 主节点
+locust -f locustfile.py --master
+
+# 工作节点
+locust -f locustfile.py --worker --master-host=192.168.1.100
+```
+
+### 监控指标
+Locust提供的主要指标包括：
+- 每秒请求数(RPS)
+- 响应时间(中位数、95%、99%分位数)
+- 失败率
+- 用户数
+
+### 优势
+- 测试脚本编写简单灵活，使用Python语言
+- 支持复杂的测试场景和逻辑
+- 分布式压测能力强
+- 实时监控界面直观易用
+- 开源免费
